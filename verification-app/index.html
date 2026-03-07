@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Telika Verification — Verify On-Chain Proofs</title>
+  <meta name="description" content="Independently verify blockchain-anchored proofs of founder verification events on the Polygon network. Telika's open-source transparency initiative." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body>
+  <!-- Ambient Background -->
+  <div class="ambient-bg">
+    <div class="ambient-orb ambient-orb--1"></div>
+    <div class="ambient-orb ambient-orb--2"></div>
+    <div class="ambient-orb ambient-orb--3"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header__container">
+      <a href="#" class="header__logo" id="logo">
+        <div class="header__logo-icon">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="8" fill="url(#logo-grad)" />
+            <path d="M8 12h16M8 16h12M8 20h14" stroke="white" stroke-width="2" stroke-linecap="round" />
+            <circle cx="24" cy="20" r="4" fill="white" fill-opacity="0.3" />
+            <path d="M22.5 20l1 1 2-2" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <defs>
+              <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32">
+                <stop stop-color="#6366f1" />
+                <stop offset="1" stop-color="#8b5cf6" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="header__logo-text">Telika<span class="header__logo-accent">Verify</span></span>
+      </a>
+      <nav class="header__nav">
+        <button class="nav-btn active" data-page="verify" id="nav-verify">Verify Proof</button>
+        <button class="nav-btn" data-page="explorer" id="nav-explorer">Explorer</button>
+        <button class="nav-btn" data-page="about" id="nav-about">About</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main" id="main-content">
+    <!-- Verify Page -->
+    <section class="page page--active" id="page-verify">
+      <div class="hero">
+        <div class="hero__badge">
+          <span class="hero__badge-dot"></span>
+          Polygon Network
+        </div>
+        <h1 class="hero__title">Verify On-Chain<br /><span class="gradient-text">Proof Records</span></h1>
+        <p class="hero__subtitle">
+          Independently verify blockchain-anchored proofs of founder verification events.
+          Enter a proof hash or Telika ID to query the Polygon smart contract.
+        </p>
+      </div>
+
+      <!-- Search Card -->
+      <div class="glass-card search-card" id="search-card">
+        <div class="search-tabs">
+          <button class="search-tab active" data-search="hash" id="tab-hash">Proof Hash</button>
+          <button class="search-tab" data-search="telika-id" id="tab-telika-id">Telika ID</button>
+        </div>
+
+        <div class="search-input-group" id="search-group-hash">
+          <label class="search-label" for="proof-hash-input">Proof Hash (0x...)</label>
+          <div class="search-input-wrapper">
+            <input
+              type="text"
+              id="proof-hash-input"
+              class="search-input"
+              placeholder="0x1234abcd..."
+              spellcheck="false"
+              autocomplete="off"
+            />
+            <button class="search-btn" id="verify-btn">
+              <svg viewBox="0 0 20 20" fill="none" class="search-btn-icon">
+                <path d="M8.5 3a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 8.5a6.5 6.5 0 1111.58 4.02l4.45 4.45a.75.75 0 11-1.06 1.06l-4.45-4.45A6.5 6.5 0 012 8.5z" fill="currentColor"/>
+              </svg>
+              Verify
+            </button>
+          </div>
+        </div>
+
+        <div class="search-input-group hidden" id="search-group-telika-id">
+          <label class="search-label" for="telika-id-input">Telika ID</label>
+          <div class="search-input-wrapper">
+            <input
+              type="text"
+              id="telika-id-input"
+              class="search-input"
+              placeholder="TLK-001-ABCDE"
+              spellcheck="false"
+              autocomplete="off"
+            />
+            <button class="search-btn" id="lookup-btn">
+              <svg viewBox="0 0 20 20" fill="none" class="search-btn-icon">
+                <path d="M8.5 3a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 8.5a6.5 6.5 0 1111.58 4.02l4.45 4.45a.75.75 0 11-1.06 1.06l-4.45-4.45A6.5 6.5 0 012 8.5z" fill="currentColor"/>
+              </svg>
+              Look Up
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Area -->
+      <div id="results-area" class="results-area"></div>
+    </section>
+
+    <!-- Explorer Page -->
+    <section class="page" id="page-explorer">
+      <div class="hero">
+        <h1 class="hero__title">Proof<br /><span class="gradient-text">Explorer</span></h1>
+        <p class="hero__subtitle">
+          Browse recent verification events anchored on the Polygon blockchain.
+        </p>
+      </div>
+
+      <!-- Config Card -->
+      <div class="glass-card config-card">
+        <div class="config-row">
+          <label class="search-label" for="rpc-url-input">Polygon RPC URL</label>
+          <input
+            type="text"
+            id="rpc-url-input"
+            class="search-input"
+            placeholder="https://polygon-amoy.g.alchemy.com/v2/YOUR_KEY"
+            spellcheck="false"
+          />
+        </div>
+        <div class="config-row">
+          <label class="search-label" for="contract-address-input">Contract Address</label>
+          <input
+            type="text"
+            id="contract-address-input"
+            class="search-input"
+            placeholder="0x..."
+            spellcheck="false"
+          />
+        </div>
+        <button class="search-btn config-connect-btn" id="connect-btn">
+          Connect & Load Events
+        </button>
+      </div>
+
+      <div id="explorer-results" class="results-area"></div>
+    </section>
+
+    <!-- About Page -->
+    <section class="page" id="page-about">
+      <div class="hero">
+        <h1 class="hero__title">About<br /><span class="gradient-text">Telika Verify</span></h1>
+      </div>
+
+      <div class="glass-card about-card">
+        <h2>What is this?</h2>
+        <p>
+          Telika Verify is the open-source verification interface for the
+          <strong>Telika Blockchain-Anchored Verification System</strong>.
+          It allows anyone to independently verify cryptographic proofs of
+          key verification events — such as founder identity verification,
+          funding disbursements, and milestone confirmations — that have been
+          anchored on the Polygon blockchain.
+        </p>
+
+        <h2>How does it work?</h2>
+        <div class="about-steps">
+          <div class="about-step">
+            <div class="about-step__number">1</div>
+            <div class="about-step__content">
+              <h3>Event Occurs</h3>
+              <p>A verification event (identity check, funding, milestone) is recorded in the Telika platform.</p>
+            </div>
+          </div>
+          <div class="about-step">
+            <div class="about-step__number">2</div>
+            <div class="about-step__content">
+              <h3>Proof Generated</h3>
+              <p>A keccak256 hash of the non-sensitive event data is created. Sensitive data (bank details, personal info) is never included.</p>
+            </div>
+          </div>
+          <div class="about-step">
+            <div class="about-step__number">3</div>
+            <div class="about-step__content">
+              <h3>On-Chain Anchoring</h3>
+              <p>The proof hash and metadata are recorded on the Polygon blockchain via a smart contract, creating a tamper-proof audit trail.</p>
+            </div>
+          </div>
+          <div class="about-step">
+            <div class="about-step__number">4</div>
+            <div class="about-step__content">
+              <h3>Independent Verification</h3>
+              <p>Anyone can use this interface to verify a proof by querying the Polygon smart contract directly.</p>
+            </div>
+          </div>
+        </div>
+
+        <h2>Technology</h2>
+        <div class="tech-badges">
+          <span class="tech-badge">Polygon</span>
+          <span class="tech-badge">Solidity</span>
+          <span class="tech-badge">ethers.js v6</span>
+          <span class="tech-badge">TypeScript</span>
+          <span class="tech-badge">OpenZeppelin</span>
+        </div>
+
+        <div class="about-links">
+          <a href="https://github.com/Telika-Africa/scoring-and-fund-allocation" class="about-link" target="_blank" rel="noopener">
+            View on GitHub →
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2026 Telika Africa · Open Source under MIT License</p>
+  </footer>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

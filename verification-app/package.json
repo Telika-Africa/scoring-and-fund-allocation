@@ -1,0 +1,20 @@
+{
+  "name": "@telika/verification-app",
+  "version": "0.1.0",
+  "description": "Telika Verification Interface — Verify blockchain-anchored proofs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "ethers": "^6.13.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "vite": "^6.2.0"
+  }
+}

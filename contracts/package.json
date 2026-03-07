@@ -1,0 +1,24 @@
+{
+  "name": "@telika/contracts",
+  "version": "0.1.0",
+  "description": "Telika Verification Smart Contracts for Polygon",
+  "private": true,
+  "scripts": {
+    "build": "hardhat compile",
+    "test": "hardhat test",
+    "test:gas": "REPORT_GAS=true hardhat test",
+    "deploy:local": "hardhat run scripts/deploy.ts --network localhost",
+    "deploy:amoy": "hardhat run scripts/deploy.ts --network polygonAmoy",
+    "deploy:mainnet": "hardhat run scripts/deploy.ts --network polygonMainnet",
+    "verify": "hardhat verify --network polygonAmoy",
+    "clean": "hardhat clean",
+    "node": "hardhat node"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@openzeppelin/contracts": "^5.1.0",
+    "dotenv": "^16.4.7",
+    "hardhat": "^2.22.0",
+    "hardhat-gas-reporter": "^1.0.10"
+  }
+}

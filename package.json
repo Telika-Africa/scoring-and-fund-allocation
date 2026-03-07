@@ -1,0 +1,25 @@
+{
+  "name": "telika-open-source",
+  "version": "0.1.0",
+  "description": "Telika Open-Source Initiative: Blockchain-Anchored Verification for Transparent Founder Scoring & Fund Allocation",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean",
+    "dev": "turbo run dev"
+  },
+  "devDependencies": {
+    "turbo": "^2.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Telika-Africa/scoring-and-fund-allocation"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "npm@10.8.2"
+}
