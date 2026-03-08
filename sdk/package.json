@@ -1,21 +1,45 @@
 {
   "name": "@telika/sdk",
   "version": "0.1.0",
-  "description": "Telika SDK — Proof generation and blockchain interaction for the Telika verification system",
+  "description": "Telika SDK — Proof generation and blockchain interaction for the Telika verification system on Polygon",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "private": true,
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
+    "prepublishOnly": "npm run build",
     "test": "vitest run",
     "test:watch": "vitest",
     "clean": "rm -rf dist"
   },
+  "keywords": [
+    "telika",
+    "blockchain",
+    "polygon",
+    "verification",
+    "proof",
+    "keccak256",
+    "smart-contract",
+    "ethers"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Telika-Africa/scoring-and-fund-allocation",
+    "directory": "sdk"
+  },
+  "homepage": "https://github.com/Telika-Africa/scoring-and-fund-allocation/tree/main/sdk#readme",
   "dependencies": {
     "ethers": "^6.13.0"
   },
   "devDependencies": {
     "typescript": "^5.5.0",
     "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
