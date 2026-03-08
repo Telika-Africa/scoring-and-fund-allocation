@@ -208,4 +208,4 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ## About Telika
 
-Telika is an AI-powered platform dedicated to vetting and scoring African startups, facilitating transparent due diligence, and tracking venture milestones. Learn more at [telika.africa](https://telika.africa).
+Telika is an AI-powered platform dedicated to vetting and scoring African startups, facilitating transparent due diligence, and tracking venture milestones. Learn more at [telika.ai](https://telika.ai).
