@@ -1,6 +1,10 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
-import "dotenv/config";
+import dotenv from "dotenv";
+import path from "path";
+
+// Load .env from monorepo root
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 const POLYGON_AMOY_RPC_URL = process.env.POLYGON_AMOY_RPC_URL || "";
 const POLYGON_MAINNET_RPC_URL = process.env.POLYGON_MAINNET_RPC_URL || "";
@@ -41,10 +45,10 @@ const config: HardhatUserConfig = {
     },
   },
   etherscan: {
-    apiKey: {
-      polygonAmoy: POLYGONSCAN_API_KEY,
-      polygon: POLYGONSCAN_API_KEY,
-    },
+    apiKey: POLYGONSCAN_API_KEY,
+  },
+  sourcify: {
+    enabled: true,
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS === "true",
