@@ -3,7 +3,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", "artifacts/**", "typechain-types/**"]
+      "outputs": ["dist/**", "artifacts/**", "typechain-types/**", "cache/**"]
     },
     "test": {
       "dependsOn": ["build"],
@@ -18,6 +18,14 @@
       "persistent": true
     },
     "clean": {
+      "cache": false
+    },
+    "deploy:amoy": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "deploy:mainnet": {
+      "dependsOn": ["build"],
       "cache": false
     }
   }

@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "description": "Telika Open-Source Initiative: Blockchain-Anchored Verification for Transparent Founder Scoring & Fund Allocation",
   "private": true,
+  "workspaces": [
+    "contracts",
+    "sdk",
+    "verification-app"
+  ],
   "scripts": {
     "build": "turbo run build",
     "test": "turbo run test",
