@@ -3,8 +3,10 @@
 > Transparent, tamper-proof audit trails for founder verification events on the Polygon blockchain.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![npm](https://img.shields.io/npm/v/@telika/sdk)](https://www.npmjs.com/package/@telika/sdk)
 [![Polygon](https://img.shields.io/badge/Blockchain-Polygon-8247E5)](https://polygon.technology/)
 [![Solidity](https://img.shields.io/badge/Solidity-0.8.24-363636)](https://soliditylang.org/)
+[![Vercel](https://img.shields.io/badge/Verify-Live-00C244?logo=vercel)](https://telika-verify.vercel.app)
 
 ## Overview
 
