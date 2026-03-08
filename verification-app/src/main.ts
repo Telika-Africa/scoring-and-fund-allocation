@@ -351,13 +351,25 @@ async function handleConnect() {
 
     const totalProofs = Number(await contract.totalProofs());
     const currentBlock = await provider.getBlockNumber();
-    const fromBlock = Math.max(0, currentBlock - 50000);
 
-    const filter = contract.filters.ProofAnchored();
-    const events = await contract.queryFilter(filter, fromBlock, currentBlock);
+    // Paginate event queries in small chunks (Alchemy free tier = 10 blocks max)
+    const CHUNK_SIZE = 10;
+    const TOTAL_RANGE = 500; // scan last 500 blocks
+    const fromBlock = Math.max(0, currentBlock - TOTAL_RANGE);
 
-    const parsedEvents = events
-      .filter((e): e is EventLog => e instanceof EventLog)
+    const allEvents: EventLog[] = [];
+    for (let start = fromBlock; start <= currentBlock; start += CHUNK_SIZE) {
+      const end = Math.min(start + CHUNK_SIZE - 1, currentBlock);
+      try {
+        const filter = contract.filters.ProofAnchored();
+        const chunk = await contract.queryFilter(filter, start, end);
+        allEvents.push(...chunk.filter((e): e is EventLog => e instanceof EventLog));
+      } catch {
+        // Skip chunks that fail
+      }
+    }
+
+    const parsedEvents = allEvents
       .map((event) => ({
         proofHash: event.args[0] as string,
         eventType: Number(event.args[1]),
@@ -380,7 +392,7 @@ async function handleConnect() {
         </div>
       </div>
       ${parsedEvents.length === 0
-        ? '<div class="empty-state"><div class="empty-state__icon">📭</div><div class="empty-state__text">No recent events found in the last 50,000 blocks.</div></div>'
+        ? '<div class="empty-state"><div class="empty-state__icon">📭</div><div class="empty-state__text">No recent events found in the last 500 blocks.</div></div>'
         : parsedEvents.map((e) => `
           <div class="result-card" style="animation-delay: ${parsedEvents.indexOf(e) * 0.05}s">
             <div class="result-header">
